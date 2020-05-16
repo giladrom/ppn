@@ -37,6 +37,7 @@ ion-content {
   bottom: 0px;
   background: rgba(0, 0, 0, 0.276);
   padding: 15px;
+  --ion-grid-padding-xs: 2px;
   //   border-radius: 10px;
 }
 
@@ -45,8 +46,11 @@ ion-content {
   color: white;
   width: 300px;
   z-index: 2;
-  top: 5px;
-  right: 5px;
+  top: 35px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   background: rgba(0, 0, 0, 0.276);
   padding: 5px;
   //   border-radius: 10px;
@@ -73,6 +77,9 @@ ion-content {
 
 .join-huan {
   vertical-align: top;
+  font-weight: bold;
+  margin: 5px;
+  border: 1px white;
 }
 
 .ppn-title {
@@ -82,25 +89,43 @@ ion-content {
   //   padding: 5px;
 }
 
-.location-box {
-  display: flex;
-  flex-direction: column;
-  justify-self: end;
-  padding-top: 5px;
-  padding-left: 10px;
+.stat-number {
+  font-size: 4em;
+  text-align: right;
+  font-weight: bold;
+  vertical-align: top;
+  margin-top: -15px;
+  padding-top: -15px;
+  top: -15px;
+  text-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.226);
+
+  // background: rgba(0, 0, 0, 0.276);
 }
 
-.location-title {
-  font-size: 13px;
-  text-transform: uppercase;
-  font-weight: bold;
-  //   padding: 5px;
+.stat-info {
+  font-size: 12px;
+  font-weight: 600;
 }
-.location {
-  font-size: 13px;
-  //   text-transform: uppercase;
-  font-weight: bold;
-  //   padding: 5px;
+
+.time-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  color: black;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.time-badge {
+  position: absolute;
+  bottom: 7px;
+  right: 0px;
+  font-size: 10px;
+  font-weight: normal;
+}
+
+.time-badge > ion-badge {
+  font-size: 10px;
 }
 
 .logo {
@@ -151,6 +176,44 @@ ion-content {
     opacity: 0;
     width: 0;
     height: 0;
+  }
+}
+
+.loading-logo {
+}
+
+.loading-title {
+  width: 100%;
+  // height: 100px;
+  left: 0;
+  right: 0;
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.8em;
+}
+
+.loading-text {
+  width: 350px;
+  height: 100px;
+  left: 0;
+  right: 0;
+  top: -60px;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+  animation: blinkText 1.2s ease-in-out 1s 5 alternate;
+}
+
+@keyframes blinkText {
+  100% {
+    opacity: 0;
   }
 }
 
@@ -241,6 +304,15 @@ ion-content {
   }
 }
 
+:root {
+  --animation-time: 2s;
+}
+
+div[id^='blink'] {
+  top: -100px;
+  left: -100px;
+}
+
 .blink {
   z-index: 2;
   position: absolute;
@@ -248,27 +320,235 @@ ion-content {
   height: auto;
   border-radius: 50%;
   background-color: #fff;
-  box-shadow: 0 0 60px 30px #fff, 0 0 100px 60px #f0f, 0 0 140px 90px #0ff;
-  animation: blinker 0.7s cubic-bezier(0.5, 0, 1, 1) alternate forwards;
+  box-shadow: 0 0 20px 15px #fff, 0 0 30px 20px #f0f, 0 0 50px 35px #0ff;
+  animation: 1s blinker var(--animation-time) cubic-bezier(0.5, 0, 1, 1)
+    alternate infinite;
+
+  will-change: top, left, transform;
 }
 
 .pet-icon {
   margin: auto;
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
+}
+
+.sharer-icon {
+  vertical-align: center;
 }
 
 .sharer-icon:hover {
   cursor: pointer;
 }
-@keyframes blinker {
+
+.header {
+  z-index: 2;
+  position: absolute;
+  // text-transform: capitalize;
+  font-weight: 550;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  color: white;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+
+  text-align: center;
+  vertical-align: center;
+  padding: 0px;
+  font-size: 15px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.253);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-title {
+  color: rgb(67, 67, 67);
+  padding: 10px;
+}
+
+.streaming-box {
+  z-index: 2;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: 120px;
+  left: 5px;
+  padding: 7px;
+  border: 0.5px solid transparent;
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.253);
+  animation: slideInOut 10s ease-in-out 10s infinite forwards;
+  will-change: transform;
+}
+
+.streaming-timestamp {
+  color: rgb(0, 0, 0);
+  font-size: 10px;
+  font-weight: bold;
+  // text-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.226);
+  text-transform: capitalize;
+}
+
+.streaming-event {
+  color: rgb(0, 0, 0);
+  font-size: 10px;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+
+.streaming-name {
+  color: rgb(0, 0, 0);
+  font-size: 10px;
+  font-weight: bold;
+  --background: transparent;
+  --padding-start: 0px;
+}
+
+#streaming-item {
+  display: none;
+}
+
+.streaming-location {
+  color: rgb(0, 0, 0);
+  font-size: 8px;
+  font-weight: normal;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeInOut {
   0% {
     opacity: 0;
   }
+
+  10%,
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes slideInOut {
+  0% {
+    -webkit-transform: translateX(-200%);
+  }
+
+  10%,
+  90% {
+    -webkit-transform: translateX(0px);
+  }
+
+  100% {
+    -webkit-transform: translateX(-200%);
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: translateX(-100%);
+  }
+
+  100% {
+    -webkit-transform: translateX(0px);
+  }
+}
+
+@-webkit-keyframes slideOut {
+  0% {
+    -webkit-transform: translateX(0px);
+  }
+
+  100% {
+    -webkit-transform: translateX(-200%);
+  }
+}
+
+@keyframes blinker {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
   50% {
     opacity: 1;
   }
+}
+.streaming {
+  font-size: 13px;
+  padding-top: 0px;
+}
+
+$duration: 30s;
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
   100% {
-    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.ticker-wrap {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 4rem;
+  background-color: rgba(#000, 0.9);
+  padding-left: 100%;
+  box-sizing: content-box;
+
+  .ticker {
+    display: inline-block;
+    height: 4rem;
+    line-height: 4rem;
+    white-space: nowrap;
+    padding-right: 100%;
+    box-sizing: content-box;
+
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-name: ticker;
+    animation-name: ticker;
+    -webkit-animation-duration: $duration;
+    animation-duration: $duration;
+
+    &__item {
+      display: inline-block;
+
+      padding: 0 2rem;
+      font-size: 2rem;
+      color: white;
+    }
   }
 }
